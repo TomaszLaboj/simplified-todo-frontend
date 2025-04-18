@@ -6,7 +6,6 @@ export interface TaskType {
 }
 
 const Task  = ({title, isDone}: TaskType)=> {
-console.log(isDone);
     return (
         <>
             <div className="card">

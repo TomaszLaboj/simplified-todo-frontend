@@ -1,6 +1,10 @@
 import {useState} from "react";
 
-function AddTask () {
+interface AddTaskProps {
+    refetch: () => void;
+}
+
+function AddTask ({ refetch }: AddTaskProps ) {
 
     const [taskDescription, setTaskDescription] = useState('');
     const handleChange = (event: { target: { value: string; }; }) => {
@@ -18,8 +22,9 @@ function AddTask () {
             window.alert("task is not updated" + response.status)
 
         }
-        console.log(taskDescription);
+
         setTaskDescription(() => "")
+        refetch();
     }
     return (
         <>

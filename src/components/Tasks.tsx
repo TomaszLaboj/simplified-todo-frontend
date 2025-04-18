@@ -1,22 +1,28 @@
 import Task, { TaskType } from './Task.tsx';
-import { useEffect, useState } from "react";
+import {useCallback, useEffect, useState} from "react";
 
-const Tasks = () => {
+interface TasksProps {
+    reloadData: boolean;
+    refetchData: () => void;
+}
+
+const Tasks = ({ reloadData, refetchData }: TasksProps) => {
     const url = 'http://localhost:8080/';
-
     const [tasks, setTasks] = useState<TaskType[]>([])
-
-    useEffect(() => {
+    const refetch = useCallback(() => {
         const getData = async () => {
            const data = await fetch(url);
            const list = await data.json();
            setTasks(list);
         }
-
         getData();
+        refetchData();
+    }, [url])
 
-    }, [])
-    console.log(tasks)
+    useEffect(() => {
+        refetch();
+    }, [reloadData, refetch])
+
     return (
         <>
             <div>
