@@ -1,10 +1,10 @@
-import Task from './Task.tsx';
+import Task, { TaskType } from './Task.tsx';
 import { useEffect, useState } from "react";
 
 const Tasks = () => {
     const url = 'http://localhost:8080/';
 
-    const [tasks, setTasks] = useState<Task[]>([])
+    const [tasks, setTasks] = useState<TaskType[]>([])
 
     useEffect(() => {
         const getData = async () => {
@@ -16,11 +16,11 @@ const Tasks = () => {
         getData();
 
     }, [])
-
+    console.log(tasks)
     return (
         <>
             <div>
-                {tasks.map((task) => <Task title={task.title} isDone={task.isDone}/>)}
+                {tasks.map((task) => <Task key={task.title} title={task.title} isDone={task.isDone ? 'done' : 'not done'}/>)}
             </div>
         </>
     )

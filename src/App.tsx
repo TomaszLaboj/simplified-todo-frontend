@@ -9,14 +9,15 @@ function App() {
 
   return (
     <>
-      <div>
+      <div className="title">
           To do app
       </div>
-
-        <div>
-            <AddTask />
-        </div>
+      <div>
+        <AddTask />
+      </div>
+      <div>
         <Tasks />
+      </div>
     </>
   )
 }

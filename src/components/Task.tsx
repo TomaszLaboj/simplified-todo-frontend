@@ -1,16 +1,18 @@
+import './Task.css';
 
-interface Task {
+export interface TaskType {
     title: string;
-    isDone: boolean;
+    isDone: string;
 }
 
-function Task ({ title, isDone }: Task){
-
+const Task  = ({title, isDone}: TaskType)=> {
+console.log(isDone);
     return (
         <>
-            <div>
-                {title}
-                {isDone ? "finished" : "not finished"}
+            <div className="card">
+                <p>{title}</p>
+                <p>{isDone}</p>
+
             </div>
         </>
     )
