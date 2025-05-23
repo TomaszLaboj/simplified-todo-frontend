@@ -1,34 +1,27 @@
-import Task, { TaskType } from './Task.tsx';
-import {useCallback, useEffect, useState} from "react";
+import { ChangeEvent, useContext, useState } from "react";
+import MyContext from "../store/context.ts";
 
-interface TasksProps {
-    reloadData: boolean;
-    refetchData: () => void;
-}
+const Tasks = () => {
+    const [input, setInput] = useState('');
+    const { tasks, setTasks } = useContext(MyContext);
 
-const Tasks = ({ reloadData, refetchData }: TasksProps) => {
-    const url = 'http://localhost:8080/';
-    const [tasks, setTasks] = useState<TaskType[]>([])
-    const refetch = useCallback(() => {
-        const getData = async () => {
-           const data = await fetch(url);
-           const list = await data.json();
-           setTasks(list);
-        }
-        getData();
-        refetchData();
-    }, [url])
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        setInput(() => event.target.value);
+    };
 
-    useEffect(() => {
-        refetch();
-    }, [reloadData, refetch])
-
+    const handleSubmit = () => {
+        setTasks([...tasks, input]);
+        setInput('');
+    };
     return (
         <>
             <div>
-                {tasks.map((task) => <Task key={task.title} title={task.title} isDone={task.isDone ? 'done' : 'not done'}/>)}
+                {tasks}
             </div>
+            <input value={input} onChange={handleChange}/>
+            <button onClick={handleSubmit}>Submit</button>
         </>
-    )
-}
+    );
+
+};
 export default Tasks;

@@ -1,11 +1,11 @@
 import './Task.css';
 
-export interface TaskType {
+export interface ToDoInterface {
     title: string;
     isDone: string;
 }
 
-const Task  = ({title, isDone}: TaskType)=> {
+const ToDo  = ({title, isDone}: ToDoInterface)=> {
     return (
         <>
             <div className="card">
@@ -17,4 +17,4 @@ const Task  = ({title, isDone}: TaskType)=> {
     )
 }
 
-export default Task;
+export default ToDo;

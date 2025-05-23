@@ -25,3 +25,14 @@ body {
   border-radius: 12px;
 }
 
+.expandable {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-out;
+}
+
+.expandable.expanded {
+  max-height: 500px;
+  color: yellow;
+}
+
